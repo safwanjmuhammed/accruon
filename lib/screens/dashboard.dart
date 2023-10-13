@@ -20,7 +20,7 @@ class _DashboardState extends State<Dashboard> {
     final permission = await Geolocator.checkPermission();
     final locationService = await Geolocator.isLocationServiceEnabled();
     try {
-      if (permission == LocationPermission.denied || locationService == false) {
+      if (permission == LocationPermission.denied) {
         await Geolocator.requestPermission();
       } else {
         Geolocator.getPositionStream(
