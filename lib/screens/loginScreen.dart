@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (isBiometricSupported && canCheckBiometrics) {
         isAuthenticated = await localAuthentication.authenticate(
           localizedReason: 'Varify Fingerprint.',
-          options: AuthenticationOptions(biometricOnly: true),
+          // options: AuthenticationOptions(biometricOnly: true),
         );
         if (isAuthenticated) {
           Navigator.push(
@@ -48,10 +48,13 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton:
-          FloatingActionButton(child: Icon(Icons.camera), onPressed: () {}),
+      // floatingActionButton:
+      //     FloatingActionButton(child: Icon(Icons.camera), onPressed: () {}),
       appBar: AppBar(
         title: Text('LOGIN'),
+      ),
+      body: Center(
+        child: Text('LOGIN WITH BIOMETRICS'),
       ),
     );
   }

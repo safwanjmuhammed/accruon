@@ -30,11 +30,12 @@ class _DashboardState extends State<Dashboard> {
           setState(() {
             latitude = position.latitude;
             longitude = position.longitude;
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('LAT  $latitude   LON  $longitude')));
+
             print(latitude);
             print(longitude);
           });
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('LAT  $latitude   LON  $longitude')));
         });
       }
     } catch (e) {
