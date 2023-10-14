@@ -36,7 +36,6 @@ class _LoginScreenState extends State<LoginScreen> {
       print(e);
     }
     return isAuthenticated;
-    // throw Exception('AUTHENTICATION FAILED');
   }
 
   @override
@@ -48,8 +47,12 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton:
-      //     FloatingActionButton(child: Icon(Icons.camera), onPressed: () {}),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.camera),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Dashboard()));
+          }),
       appBar: AppBar(
         title: Text('LOGIN'),
       ),

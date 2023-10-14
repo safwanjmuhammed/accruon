@@ -34,8 +34,6 @@ class _DashboardState extends State<Dashboard> {
             print(latitude);
             print(longitude);
           });
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('LAT  $latitude   LON  $longitude')));
         });
       }
     } catch (e) {
@@ -83,12 +81,21 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     if (controller!.value.isInitialized) {
       return Scaffold(
-        floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.camera_alt_sharp),
-            onPressed: () {
-              takePicture();
-            }),
-        body: CameraPreview(controller!),
+        body: SafeArea(
+          child: Column(
+            children: [
+              CameraPreview(controller!),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: ElevatedButton(
+                    onPressed: () {
+                      takePicture();
+                    },
+                    child: Text('Take Picture')),
+              )
+            ],
+          ),
+        ),
       );
     } else {
       return const CircularProgressIndicator();
