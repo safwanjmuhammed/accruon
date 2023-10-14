@@ -15,7 +15,9 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       final LocalAuthentication localAuthentication = LocalAuthentication();
       bool isBiometricSupported = await localAuthentication.isDeviceSupported();
+      print('BIOOOOMETRICS SUPPORTED?$isBiometricSupported');
       bool canCheckBiometrics = await localAuthentication.canCheckBiometrics;
+      print('CANCHECKBIOMETRICS SUPPORTED?$isBiometricSupported');
 
       bool isAuthenticated = false;
 
@@ -24,27 +26,28 @@ class _LoginScreenState extends State<LoginScreen> {
           localizedReason: 'Varify Fingerprint.',
           options: AuthenticationOptions(biometricOnly: true),
         );
+        print('AUTHENTICATION$isAuthenticated');
       }
       return isAuthenticated;
     } catch (e) {
       print(e);
     }
-    throw Exception();
+    throw Exception('AUTHENTICATION FAILED');
   }
 
-  authenticatedOrNot() async {
-    final isAuth = await authenticateWithFingerprint();
-    setState(() {
-      isAuthenticated = isAuth;
-      print(isAuthenticated);
-    });
-  }
+  // authenticatedOrNot() async {
+  //   final isAuth = await authenticateWithFingerprint();
+  //   setState(() {
+  //     isAuthenticated = isAuth;
+  //     print(isAuthenticated);
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
     authenticateWithFingerprint();
-    authenticatedOrNot();
+    // authenticatedOrNot();
   }
 
   @override

@@ -60,7 +60,9 @@ class _DashboardState extends State<Dashboard> {
       final image = await controller!.takePicture();
       print(image.path);
       final storageDirectory = await getExternalStorageDirectories();
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
