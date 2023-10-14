@@ -19,46 +19,37 @@ class _LoginScreenState extends State<LoginScreen> {
       bool canCheckBiometrics = await localAuthentication.canCheckBiometrics;
       print('CANCHECKBIOMETRICS SUPPORTED?$isBiometricSupported');
 
-      bool isAuthenticated = false;
+      isAuthenticated = false;
 
       if (isBiometricSupported && canCheckBiometrics) {
         isAuthenticated = await localAuthentication.authenticate(
           localizedReason: 'Varify Fingerprint.',
           options: AuthenticationOptions(biometricOnly: true),
         );
-        print('AUTHENTICATION$isAuthenticated');
+        if (isAuthenticated) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Dashboard()));
+        }
+        return isAuthenticated;
       }
-      return isAuthenticated;
     } catch (e) {
       print(e);
     }
-    throw Exception('AUTHENTICATION FAILED');
+    return isAuthenticated;
+    // throw Exception('AUTHENTICATION FAILED');
   }
-
-  // authenticatedOrNot() async {
-  //   final isAuth = await authenticateWithFingerprint();
-  //   setState(() {
-  //     isAuthenticated = isAuth;
-  //     print(isAuthenticated);
-  //   });
-  // }
 
   @override
   void initState() {
     super.initState();
     authenticateWithFingerprint();
-    // authenticatedOrNot();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.camera),
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Dashboard()));
-          }),
+      floatingActionButton:
+          FloatingActionButton(child: Icon(Icons.camera), onPressed: () {}),
       appBar: AppBar(
         title: Text('LOGIN'),
       ),
